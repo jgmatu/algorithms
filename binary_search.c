@@ -25,7 +25,6 @@ int64_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
         middle = (max + min) / 2;
         iterations = iterations + 1;
     }
-
     return (iterations < max_iterations) ? middle : -1;
 }
 
@@ -38,7 +37,7 @@ int main(int argn, char **argv)
     {
         test[i] = i * 2;
     }
-    int64_t index = binary_search(test, size, 102);
+    int64_t index = binary_search(test, size, 77238U);
 
     fprintf(stdout, "Value found index: %ld\n", index);
 }
