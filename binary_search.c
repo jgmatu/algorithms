@@ -2,9 +2,9 @@
 #include <sys/types.h>
 #include <math.h>
 
-#define SIZE_SAMPLE __UINT32_MAX__ / 2
+#define SIZE_SAMPLE __UINT32_MAX__ / 2U
 
-int64_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
+int32_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
 {
     u_int32_t middle = size / 2;
     u_int32_t min = 0;
@@ -37,7 +37,8 @@ int main(int argn, char **argv)
     {
         test[i] = i * 2;
     }
-    int64_t index = binary_search(test, size, 77238U);
+    int32_t index = binary_search(test, size, 24142356);
 
-    fprintf(stdout, "Value found index: %ld\n", index);
+    fprintf(stdout, "Value found index: %d\n", index);
+    return 0;
 }
