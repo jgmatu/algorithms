@@ -37,7 +37,7 @@ int main(int argn, char **argv)
     {
         test[i] = i * 2;
     }
-    int32_t index = binary_search(test, size, 24142356);
+    int32_t index = binary_search(test, size, 24142356U);
 
     fprintf(stdout, "Value found index: %d\n", index);
     return 0;
