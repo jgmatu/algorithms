@@ -4,7 +4,7 @@
 
 #define SIZE_SAMPLE __UINT32_MAX__ / 2
 
-u_int32_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
+int64_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
 {
     u_int32_t middle = size / 2;
     u_int32_t min = 0;
@@ -24,11 +24,9 @@ u_int32_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
         }
         middle = (max + min) / 2;
         iterations = iterations + 1;
-        fprintf(stderr, "Middle: %u Min: %u Max: %u value %u iterations: %u max iterations: %u\n",
-            middle, min, max, value, iterations, max_iterations);
     }
 
-    return (iterations < max_iterations) ? arr[middle] : -1;
+    return (iterations < max_iterations) ? middle : -1;
 }
 
 int main(int argn, char **argv)
@@ -38,9 +36,9 @@ int main(int argn, char **argv)
 
     for (u_int32_t i = 0; i < size; ++i)
     {
-        test[i] = i;
+        test[i] = i * 2;
     }
-    u_int32_t value = binary_search(test, size, 100);
+    int64_t index = binary_search(test, size, 102);
 
-    fprintf(stdout, "Value found: %u\n", value);
+    fprintf(stdout, "Value found index: %ld\n", index);
 }
