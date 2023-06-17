@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <math.h>
+#include <stdatomic.h>
 
 #define SIZE_SAMPLE __UINT32_MAX__ / 2U
 
@@ -38,7 +39,25 @@ int main(int argn, char **argv)
         test[i] = i * 2;
     }
     int32_t index = binary_search(test, size, 24142356U);
+#if 0
+static const char cachefiles_filecharmap[256] = {
+	/* we skip space and tab and control chars */
+	[33 ... 46] = 1,		/* '!' -> '.' */
+	/* we skip '/' as it's significant to pathwalk */
+	[48 ... 127] = 1,		/* '0' -> '~' */
+};
+#endif
+    atomic_int counter = 0;
 
-    fprintf(stdout, "Value found index: %d\n", index);
+    fprintf(stdout, "Value found index: %d counter: %d\n", index, counter++);
+
+    int value [1000] = {
+         [0 ... sizeof(value) / sizeof(int) - 1] = 200,
+    };
+
+    for (int i = 0; i < sizeof(value) / sizeof(int); ++i)
+    {
+        fprintf(stdout, "%d", value[i]);
+    }
     return 0;
 }
