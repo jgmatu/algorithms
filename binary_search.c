@@ -58,7 +58,7 @@ int main(int argn, char **argv)
 
     for (u_int32_t i = 0; i < size; ++i)
     {
-        test[i] = i * 2; // Sorted value list.
+        test[i] = i * 2; // Sorted value list, need it to use a binary search sort items.
     }
 
     {
@@ -77,7 +77,7 @@ int main(int argn, char **argv)
         u_int32_t elapsed = difftimespec_us(binary_mark, now);
 
         if (index >= 0)
-            fprintf(stdout, "Value found index: %d value: %u time: %d us.\n", index, test[index], elapsed);
+            fprintf(stdout, "Value found index %d value %u time %d us.\n", index, test[index], elapsed);
         else
             fprintf(stdout, "%s time %d us.\n", "Value not found!", elapsed);
 
@@ -100,13 +100,13 @@ int main(int argn, char **argv)
         u_int32_t elapsed = difftimespec_us(binary_mark, now);
 
         if (index >= 0)
-            fprintf(stdout, "Value found index: %d value: %u time: %d us.\n", index, test[index], elapsed);
+            fprintf(stdout, "Value found index %d value %u time %d us.\n", index, test[index], elapsed);
         else
             fprintf(stdout, "%s time %d us.\n", "Value not found!", elapsed);
 
         elapsed_linear = elapsed;
     }
 
-    fprintf(stdout, "Relative performance binary search is %f times faster \n", ((float) elapsed_linear) / ((float) elapsed_binary));
+    fprintf(stdout, "Relative performance binary search is %f times faster in this case of use.\n", ((float) elapsed_linear) / ((float) elapsed_binary));
     return 0;
 }
