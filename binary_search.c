@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdatomic.h>
 
-#define SIZE_SAMPLE __UINT32_MAX__ / 2U
+#define SIZE_SAMPLE __UINT32_MAX__ / 2
 
 int32_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
 {
@@ -31,33 +31,18 @@ int32_t binary_search(u_int32_t *arr, u_int32_t size, u_int32_t value)
 
 int main(int argn, char **argv)
 {
-    u_int32_t test[SIZE_SAMPLE];
-    u_int32_t size = sizeof(test) / sizeof(u_int32_t);
+    static u_int32_t test[SIZE_SAMPLE];
+    u_int32_t size = SIZE_SAMPLE;
 
     for (u_int32_t i = 0; i < size; ++i)
     {
         test[i] = i * 2;
-    }
-    int32_t index = binary_search(test, size, 24142356U);
-#if 0
-static const char cachefiles_filecharmap[256] = {
-	/* we skip space and tab and control chars */
-	[33 ... 46] = 1,		/* '!' -> '.' */
-	/* we skip '/' as it's significant to pathwalk */
-	[48 ... 127] = 1,		/* '0' -> '~' */
-};
-#endif
-    atomic_int counter = 0;
+    }   
+    int32_t index = binary_search(test, size, __UINT32_MAX__ / 2 + 1);
 
-    fprintf(stdout, "Value found index: %d counter: %d\n", index, counter++);
-
-    int value [1000] = {
-         [0 ... sizeof(value) / sizeof(int) - 1] = 200,
-    };
-
-    for (int i = 0; i < sizeof(value) / sizeof(int); ++i)
-    {
-        fprintf(stdout, "%d", value[i]);
-    }
+    if (index >= 0)
+        fprintf(stdout, "Value found index: %d value: %u\n", index, test[index]);
+    else
+        fprintf(stdout, "%s\n", "Value not found!");
     return 0;
 }
